@@ -5,27 +5,30 @@ const router = express.Router();
 const multer = require('multer');
 
 const {getStudents,createStudents,del,update} = require('../modules/Student/Student.controller');
-const upload = multer({
-    storage: multer.diskStorage(
-        {
-            destination: function (req, file, cb) {
-                cb(null, './uploads/');
-            },
-            filename: function (req, file, cb) {
-                cb(
-                    null,
-                    new Date().valueOf() + 
-                    '_' +
-                    file.originalname
-                );
-            }
-        }
-    ), 
-});
-    router.post('/',upload.single('file'),createStudents)
+const fileUploader = require('../Middleware/fileuploader');
+const setFileUpload = require('../Middleware/fileupload');
+//const upload = multer({
+  //  storage: multer.diskStorage(
+    //    {
+      //      destination: function (req, file, cb) {
+        //        cb(null, './uploads/');
+          //  },
+            //filename: function (req, file, cb) {
+              //  cb(
+                //    null,
+                  //  new Date().valueOf() + 
+                    //'_' +
+                    //file.originalname
+                //);
+            //}
+        //}
+    //), 
+//});
+    router.post('/',fileUploader(setFileUpload ('profile-image')),createStudents);
+   // router.post('/',upload.single('file'),createStudents)
     console.log('getStudents')
-   // router.post("/upload",getStudents);
-    router.post('/',createStudents)
+   router.post("/upload",getStudents);
+   // router.post('/',createStudents)
     router.get('/',getStudents)
     router.put('/:id',update)
     router.delete('/:id',del)

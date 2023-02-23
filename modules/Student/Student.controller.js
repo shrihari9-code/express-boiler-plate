@@ -3,23 +3,21 @@
 const messageUtil = require('../../utilities/message');
 const responseUtil = require('../../utilities/response');
 const StudentService = require('./Student.service');
+//const { copyFile, deleteFile } = require('../../utilities/s3bucket');
 
 
 
 exports.createStudents = async(req,res,next)=>{
   try{
     console.log('createStudents')
-    const file = '/uploads/' + req.file.filename
-    console.log(file)
-    const mysqlUserData = await StudentService.createStudentsFromMysql(req.body,file);
+    const imageUrl=(req.files && req.files.profileImage!==undefined) ? req.files.profileImage[0].transforms[0].location:null;
+    console.log(imageUrl)
+    const mysqlUserData = await StudentService.createStudentsFromMysql(req.body,imageUrl);
     console.log(mysqlUserData)
 
-    responseUtil.successResponse(res,messageUtil.usersFetched,{
-      
-      mysqlUserData
-    })
+    responseUtil.successResponse(res,messageUtil.usersFetched,{ mysqlUserData })
   }catch(err){
-    console.log(Error)
+console.log(Error)
   }
 }
 

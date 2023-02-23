@@ -10,6 +10,7 @@ const { param } = require('../../routes');
 
 exports.createStudentsFromMysql = async(data,image)=>{
   console.log('createStudentsFromMysql')
+  console.log(data)
   return mysqlModels.student.create({...data,image});
 };
 exports.getStudentsFromMysql = async() => {

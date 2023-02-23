@@ -1,5 +1,5 @@
 'use strict';
-
+const Dotenv = require('dotenv');
 const dbConstants = require('./dbConstants.json');
 
 module.exports = {
@@ -18,5 +18,14 @@ module.exports = {
     INTERNAL_SERVER_ERROR: 500,
     BAD_GATEWAY: 502,
     SERVICE_UNAVAILABLE: 503
-  }
+  },
+  S3: {
+    ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
+    SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
+    SIGNATURE_VERSION: process.env.S3_SIGNATURE_VERSION || 'v4',
+    REGION: process.env.S3_REGION,
+    BUCKET: process.env.S3_BUCKET,
+    EXPIRY: process.env.S3_EXPIRY || 86400,
+    URL: process.env.S3_URL,
+},
 };

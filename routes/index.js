@@ -6,12 +6,13 @@ const router = express.Router();
 
 
 const data = require('../modules/data');
-//const user = require('./user');
+// const user = require('./user');
 const student = require('./student')
 const course = require('./course')
 const marks = require('./marks')
 const admin = require('./admin')
-
+const assets = require('./assets')
+const networks = require('./network')
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
@@ -22,7 +23,9 @@ router.use('/student',student)
 router.use('/course',course)
 router.use('/marks',marks)
 router.use('/admin',admin)
+router.use('/assets',assets)
+router.use('/network',networks)
 
-//router.use('/user', user);
+// router.use('/user', user);
 
 module.exports = router;

@@ -11,7 +11,7 @@ exports.createCourseFromMysql = (data)=>{
 };
 exports.getCourseFromMysql = () => {
   console.log('getStudentsFromMysql')
-  return mysqlModels.course.findAll({
+  return mysqlModels.course.findAl({
     include:[{
       model:mysqlModels.student,
       model:mysqlModels.marks
